@@ -3,6 +3,8 @@ services:
   eureka:
     image: yokv/sc-devops-eureka
     container_name: server-eureka-peer1
+    expose:
+    - 8761
     ports:
     - 8761:8761
     networks:
@@ -16,6 +18,8 @@ services:
     - app-net
     ports:
     - 8080:8080
+    expose:
+    - 8080
   app-b:
     image: yokv/sc-devops-app-b
     environment:
@@ -24,6 +28,8 @@ services:
     - app-net
     ports:
     - 8088:8088
+    expose:
+    - 8088
 
 networks:
   app-net:
