@@ -1,25 +1,25 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 services:
 - docker
 
 install:
-  - mvn clean install
+- mvn clean install
 
 script:
-  - docker login -u ${hubaccount} -p ${hubpwd}
+- docker login -u ${hubaccount} -p ${hubpwd}
 
-  - docker build -t yokv/sc-server-eureka ./admin/server-eureka
-  - docker push yokv/sc-server-eureka
-  - docker build -t yokv/sc-server-config ./admin/server-config
-  - docker push yokv/sc-server-config
-  - docker build -t yokv/sc-hystrix-dashboard ./admin/server-hystrix-dashboard
-  - docker push yokv/sc-hystrix-dashboard
+- docker build -t yokv/sc-server-eureka ./admin/server-eureka
+- docker push yokv/sc-server-eureka
+- docker build -t yokv/sc-server-config ./admin/server-config
+- docker push yokv/sc-server-config
+- docker build -t yokv/sc-hystrix-dashboard ./admin/server-hystrix-dashboard
+- docker push yokv/sc-hystrix-dashboard
 
 branches:
   only:
-    - master
+  - master
 notifications:
   webhooks: https://oapi.dingtalk.com/robot/send?access_token=aee16a814aa2d5b289cf6453ba8ee2144b477e2fd5a759ceee777b826494d842
   slack:
