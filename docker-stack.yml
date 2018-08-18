@@ -1,0 +1,68 @@
+version: "3"
+services:
+  eureka:
+    image: yokv/sc-devops-eureka
+    ports:
+    - 8761:8761
+    networks:
+    - cloud-net
+    environment:
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
+    - eureka.instance.prefer-ip-address=true
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+        reservations:
+          cpus: '0.50'
+          memory: 1024M
+
+  app-a:
+    image: yokv/sc-devops-app-a
+    networks:
+    - cloud-net
+    expose:
+    - 8080
+    environment:
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
+    - eureka.instance.prefer-ip-address=true
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+        reservations:
+          cpus: '0.50'
+          memory: 1024M
+
+  app-b:
+    image: yokv/sc-devops-app-b
+    networks:
+    - cloud-net
+    expose:
+    - 8088
+    environment:
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
+    - eureka.instance.prefer-ip-address=true
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+        reservations:
+          cpus: '0.50'
+          memory: 1024M
+
+networks:
+  cloud-net:
+    external:
+      name: cloud-net
