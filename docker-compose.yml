@@ -1,35 +1,32 @@
 version: "3"
 services:
   eureka:
+    build: ./eureka
     image: yokv/sc-devops-eureka
-    container_name: server-eureka-peer1
-    expose:
-    - 8761
     ports:
     - 8761:8761
     networks:
     - app-net
 
   app-a:
+    build: ./app-a
     image: yokv/sc-devops-app-a
     environment:
     - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
     networks:
     - app-net
-    ports:
-    - 8080:8080
     expose:
-    - 8080
+      - 8080
+
   app-b:
+    build: ./app-b
     image: yokv/sc-devops-app-b
     environment:
     - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
     networks:
     - app-net
-    ports:
-    - 8088:8088
     expose:
-    - 8088
+      - 8088
 
 networks:
   app-net:
