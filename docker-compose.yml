@@ -1,0 +1,44 @@
+version: "3"
+services:
+
+  server-eureka-peer1:
+    build: ./admin/server-eureka
+    image: yokv/sc-server-eureka
+    container_name: server-eureka-peer1
+    environment:
+    - spring.profiles.active=peer1
+    ports:
+    - 8761:8761
+    networks:
+    - app-net
+
+  service111:
+    build: ./application/service111
+    image: yokv/sc-service111
+    environment:
+    - eureka.client.serviceUrl.defaultZone=http://server-eureka-peer1:8761/eureka/,http://server-eureka-peer2:8762/eureka/
+    #      - spring.kafka.bootstrap-servers=kafka1:9092,kafka2:9092
+    #      - spring.cloud.stream.kafka.binder.brokers=kafka1:9092,kafka2:9092
+    - spring.zipkin.base-url=http://zipkin:9411/
+    - spring.boot.admin.client.url=http://admin:9100
+    networks:
+    - app-net
+    ports:
+    - 8111:8111
+
+  service222:
+    build: ./application/service222
+    image: yokv/sc-service222
+    environment:
+    - eureka.client.serviceUrl.defaultZone=http://server-eureka-peer1:8761/eureka/,http://server-eureka-peer2:8762/eureka/
+    - spring.zipkin.base-url=http://zipkin:9411/
+    #      - spring.cloud.stream.kafka.binder.brokers=kafka1:9092,kafka2:9092
+    - spring.boot.admin.client.url=http://admin:9100
+    networks:
+    - app-net
+    ports:
+    - 8222:8222
+
+
+networks:
+  app-net:
