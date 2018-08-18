@@ -11,8 +11,6 @@ services:
   app-a:
     build: ./app-a
     image: yokv/sc-devops-app-a
-    environment:
-    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
     networks:
     - app-net
     expose:
@@ -21,8 +19,6 @@ services:
   app-b:
     build: ./app-b
     image: yokv/sc-devops-app-b
-    environment:
-    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
     networks:
     - app-net
     expose:
