@@ -21,6 +21,11 @@ docker run --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/doc
 
 ## 部分environment不起作用
 [相关issues](https://github.com/spring-cloud/spring-cloud-netflix/issues/2541)
+[doc](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config)
+
+其他项目能正常使用environment(与操作系统还有关系!!!)
+官方文档中解释：
+If you use environment variables rather than system properties, **most operating systems** disallow period-separated key names, but you can use underscores instead (for example, SPRING_CONFIG_NAME instead of spring.config.name).
 
 
 ## spring cloud 网络支持
