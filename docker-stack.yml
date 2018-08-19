@@ -3,11 +3,11 @@ services:
   eureka:
     image: yokv/sc-devops-eureka
     ports:
-      - 8761:8761
+    - 8761:8761
     networks:
-      - cloud-net
+    - cloud-net
     environment:
-      - spring.cloud.inetutils.preferred-networks=10.0.1.
+      SPRING_PROFILES_ACTIVE: stack
     deploy:
       restart_policy:
         condition: on-failure
@@ -22,10 +22,9 @@ services:
   app-a:
     image: yokv/sc-devops-app-a
     networks:
-      - cloud-net
+    - cloud-net
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
-      - spring.cloud.inetutils.preferred-networks=10.0.1.
+      SPRING_PROFILES_ACTIVE: stack
     deploy:
       replicas: 2
       restart_policy:
@@ -41,10 +40,9 @@ services:
   app-b:
     image: yokv/sc-devops-app-b
     networks:
-      - cloud-net
+    - cloud-net
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
-      - spring.cloud.inetutils.preferred-networks=10.0.1.
+      SPRING_PROFILES_ACTIVE: stack
     deploy:
       replicas: 3
       restart_policy:
@@ -55,7 +53,7 @@ services:
           memory: 2048M
         reservations:
           cpus: '0.50'
-          memory: 1024M
+          memory: 512M
 
 networks:
   cloud-net:

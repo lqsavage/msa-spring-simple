@@ -1,0 +1,4 @@
+spring:
+  cloud:
+    inetutils:
+      preferred-networks: 10.0.1.
