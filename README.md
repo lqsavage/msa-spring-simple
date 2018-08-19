@@ -17,3 +17,7 @@ docker network create -d overlay --subnet 10.0.1.0/24 cloud-net
 docker stack deploy app -c docker-stack.yml
 docker run --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
 ```
+
+
+## 部分environment不起作用
+[相关issues](https://github.com/spring-cloud/spring-cloud-netflix/issues/2541)

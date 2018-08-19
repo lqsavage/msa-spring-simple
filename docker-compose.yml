@@ -4,15 +4,15 @@ services:
     build: ./eureka
     image: yokv/sc-devops-eureka
     ports:
-    - 8761:8761
+      - 8761:8761
     networks:
-    - app-net
+      - app-net
 
   app-a:
     build: ./app-a
     image: yokv/sc-devops-app-a
     networks:
-    - app-net
+      - app-net
     expose:
       - 8080
 
@@ -20,7 +20,7 @@ services:
     build: ./app-b
     image: yokv/sc-devops-app-b
     networks:
-    - app-net
+      - app-net
     expose:
       - 8088
 
