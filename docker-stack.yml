@@ -17,7 +17,7 @@ services:
           memory: 2048M
         reservations:
           cpus: '0.50'
-          memory: 1024M
+          memory: 512M
 
   app-a:
     image: yokv/sc-devops-app-a
@@ -36,7 +36,7 @@ services:
           memory: 2048M
         reservations:
           cpus: '0.50'
-          memory: 1024M
+          memory: 512M
 
   app-b:
     image: yokv/sc-devops-app-b

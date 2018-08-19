@@ -16,7 +16,7 @@ services:
     expose:
     - 8080
     environment:
-      - spring.profiles.active=compose
+      SPRING_PROFILES_ACTIVE: compose
 
   app-b:
     build: ./app-b
@@ -26,7 +26,7 @@ services:
     expose:
     - 8088
     environment:
-      - spring.profiles.active=compose
+      SPRING_PROFILES_ACTIVE: compose
 
 networks:
   app-net:
