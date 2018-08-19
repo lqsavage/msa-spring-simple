@@ -21,3 +21,7 @@ docker run --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/doc
 
 ## 部分environment不起作用
 [相关issues](https://github.com/spring-cloud/spring-cloud-netflix/issues/2541)
+
+
+## spring cloud 网络支持
+[spring-cloud-commons](https://github.com/spring-cloud/spring-cloud-commons/blob/master/docs/src/main/asciidoc/spring-cloud-commons.adoc#ignore-network-interfaces)

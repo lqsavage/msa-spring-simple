@@ -9,3 +9,9 @@ eureka:
     fetch-registry: false
   server:
     enable-self-preservation: true
+    response-cache-update-interval-ms: 1000
+    response-cache-auto-expiration-in-seconds: 180
+    eviction-interval-timer-in-ms: 1000
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
