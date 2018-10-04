@@ -1,4 +1,4 @@
-FROM openjdk:jre-slim
+FROM java:8
 
 MAINTAINER yokv ez4tzl@hotmail.com
 
