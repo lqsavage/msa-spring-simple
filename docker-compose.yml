@@ -1,16 +1,14 @@
 version: "3"
 services:
   eureka:
-    build: ./eureka
-    image: yokv/sc-devops-eureka
+    image: yokv/eureka
     ports:
     - 8761:8761
     networks:
     - app-net
 
   app-a:
-    build: ./app-a
-    image: yokv/sc-devops-app-a
+    image: yokv/app-a
     networks:
     - app-net
     expose:
@@ -19,8 +17,7 @@ services:
       SPRING_PROFILES_ACTIVE: compose
 
   app-b:
-    build: ./app-b
-    image: yokv/sc-devops-app-b
+    image: yokv/app-b
     networks:
     - app-net
     expose:

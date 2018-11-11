@@ -4,18 +4,8 @@ jdk:
 services:
 - docker
 
-install:
-- mvn clean install
-
 script:
-- docker login -u ${hubaccount} -p ${hubpwd}
-
-- docker build -t yokv/sc-devops-eureka ./eureka
-- docker push yokv/sc-devops-eureka
-- docker build -t yokv/sc-devops-app-a ./app-a
-- docker push yokv/sc-devops-app-a
-- docker build -t yokv/sc-devops-app-b ./app-b
-- docker push yokv/sc-devops-app-b
+- mvn clean package docker:build
 
 branches:
   only:
@@ -25,4 +15,4 @@ notifications:
   slack:
     on_success: never
     on_failure: never
-    
+

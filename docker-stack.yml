@@ -1,7 +1,7 @@
 version: "3"
 services:
   eureka:
-    image: yokv/sc-devops-eureka
+    image: yokv/eureka
     ports:
     - 8761:8761
     networks:
@@ -20,7 +20,7 @@ services:
           memory: 512M
 
   app-a:
-    image: yokv/sc-devops-app-a
+    image: yokv/app-a
     networks:
     - cloud-net
     environment:
@@ -38,7 +38,7 @@ services:
           memory: 512M
 
   app-b:
-    image: yokv/sc-devops-app-b
+    image: yokv/app-b
     networks:
     - cloud-net
     environment:
