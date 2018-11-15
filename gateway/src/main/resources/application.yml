@@ -15,11 +15,11 @@ spring:
       - id: app-a
         uri: lb://app-a
         predicates:
-        - Path=/app-a/**
+        - Path=/a/**
       - id: app-b
         uri: lb://app-b
         predicates:
-        - Path=/app-b/**
+        - Path=/b/**
       discovery:
         locator:
           enabled: true
