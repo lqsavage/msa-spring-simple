@@ -7,7 +7,7 @@ services:
     networks:
     - cloud-net
     environment:
-      SPRING_PROFILES_ACTIVE: stack
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
     deploy:
       restart_policy:
         condition: on-failure
@@ -24,7 +24,10 @@ services:
     networks:
     - cloud-net
     environment:
-      SPRING_PROFILES_ACTIVE: stack
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
+    - eureka.client.registry-fetch-interval-seconds=5
+    - eureka.instance.prefer-ip-address=true
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
     deploy:
       replicas: 2
       restart_policy:
@@ -42,7 +45,32 @@ services:
     networks:
     - cloud-net
     environment:
-      SPRING_PROFILES_ACTIVE: stack
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
+    - eureka.client.registry-fetch-interval-seconds=5
+    - eureka.instance.prefer-ip-address=true
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+        reservations:
+          cpus: '0.50'
+          memory: 512M
+
+
+  gateway:
+    image: yokv/gateway
+    networks:
+    - cloud-net
+    environment:
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
+    - eureka.client.registry-fetch-interval-seconds=5
+    - eureka.instance.prefer-ip-address=true
+    - spring.cloud.inetutils.preferred-networks=10.0.1.
     deploy:
       replicas: 3
       restart_policy:
