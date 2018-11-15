@@ -17,7 +17,7 @@ public class FooController {
     @GetMapping("/foo")
     public String foo() throws UnknownHostException {
         String value = restTemplate.getForEntity("http://APP-B/foo", String.class).getBody();
-        return "  APP-A:  " + LocalDateTime.now() + InetAddress.getLocalHost().getHostAddress() + value;
+        return "  APP-A:  " + InetAddress.getLocalHost().getHostAddress() + value;
     }
 }
 

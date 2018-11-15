@@ -8,18 +8,18 @@ server:
   port: 80
 spring:
   application:
-    name: api-gateway
+    name: gateway
   cloud:
     gateway:
       routes:
       - id: app-a
         uri: lb://app-a
         predicates:
-        - Path=/a/**
+        - Path=/app-a/**
       - id: app-b
         uri: lb://app-b
         predicates:
-        - Path=/b/**
+        - Path=/app-b/**
       discovery:
         locator:
           enabled: true
