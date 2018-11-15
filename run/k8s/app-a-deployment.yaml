@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app-a
+  name: app-a
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: app-a
+    spec:
+      containers:
+      - env:
+        - name: eureka.client.registry-fetch-interval-seconds
+          value: "5"
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:8761/eureka/
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
+        image: yokv/app-a
+        name: app-a
+        resources: {}
+      restartPolicy: Always
+status: {}
