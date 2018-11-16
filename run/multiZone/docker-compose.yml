@@ -1,0 +1,93 @@
+version: "3"
+services:
+  eureka:
+    image: yokv/eureka
+    ports:
+      - 8761:8761
+    networks:
+      - app-net
+
+  app-a-1:
+    image: yokv/app-a
+    networks:
+      - app-net
+    expose:
+      - 8080
+    environment:
+      - eureka.client.serviceUrl.zone1=http://eureka:8761/eureka/
+      - eureka.client.registry-fetch-interval-seconds=5
+      - eureka.instance.prefer-ip-address=true
+      - eureka.client.region=region1
+      - eureka.instance.metadata-map.zone=zone1
+      - eureka.client.availability-zones.region1=zone1
+
+  app-b-1:
+    image: yokv/app-b
+    networks:
+      - app-net
+    expose:
+      - 8088
+    environment:
+      - eureka.client.serviceUrl.zone1=http://eureka:8761/eureka/
+      - eureka.client.registry-fetch-interval-seconds=5
+      - eureka.instance.prefer-ip-address=true
+      - eureka.client.region=region1
+      - eureka.instance.metadata-map.zone=zone1
+      - eureka.client.availability-zones.region1=zone1
+
+  gateway-1:
+    image: yokv/gateway
+    networks:
+      - app-net
+    ports:
+      - 80:80
+    environment:
+      - eureka.client.serviceUrl.zone1=http://eureka:8761/eureka/
+      - eureka.client.registry-fetch-interval-seconds=5
+      - eureka.instance.prefer-ip-address=true
+      - eureka.client.region=region1
+      - eureka.instance.metadata-map.zone=zone1
+      - eureka.client.availability-zones.region1=zone1
+
+  app-a-2:
+    image: yokv/app-a
+    networks:
+      - app-net
+    expose:
+      - 8080
+    environment:
+      - eureka.client.serviceUrl.zone2=http://eureka:8761/eureka/
+      - eureka.client.registry-fetch-interval-seconds=5
+      - eureka.instance.prefer-ip-address=true
+      - eureka.client.region=region2
+      - eureka.instance.metadata-map.zone=zone2
+      - eureka.client.availability-zones.region2=zone2
+
+  app-b-2:
+    image: yokv/app-b
+    networks:
+      - app-net
+    expose:
+      - 8088
+    environment:
+      - eureka.client.serviceUrl.zone2=http://eureka:8761/eureka/
+      - eureka.client.registry-fetch-interval-seconds=5
+      - eureka.instance.prefer-ip-address=true
+      - eureka.client.region=region2
+      - eureka.instance.metadata-map.zone=zone2
+      - eureka.client.availability-zones.region2=zone2
+  gateway-2:
+    image: yokv/gateway
+    networks:
+      - app-net
+    ports:
+      - 8087:80
+    environment:
+      - eureka.client.serviceUrl.zone2=http://eureka:8761/eureka/
+      - eureka.client.registry-fetch-interval-seconds=5
+      - eureka.instance.prefer-ip-address=true
+      - eureka.client.region=region2
+      - eureka.instance.metadata-map.zone=zone2
+      - eureka.client.availability-zones.region2=zone2
+networks:
+  app-net:
