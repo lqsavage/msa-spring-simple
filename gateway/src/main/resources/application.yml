@@ -4,6 +4,8 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5 # eureka client发送心跳给server端的频率
+    lease-expiration-duration-in-seconds: 15 # eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
 server:
   port: 80
 spring:
