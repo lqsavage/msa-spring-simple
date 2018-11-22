@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-a
+  labels:
+    app: app-a
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: app-a
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+      app: app-a
+      tier: backend
+    spec:
+      containers:
+      - name: app-a
+        image: yokv/app-a
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1000Mi
+        ports:
+        - containerPort: 8080
+      - env:
+        - name: eureka.client.registry-fetch-interval-seconds
+          value: "5"
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:8761/eureka/
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-a
+  labels:
+    app: app-a
+    tier: backend
+spec:
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: http
+  selector:
+    app: app-a
+    tier: backend
