@@ -20,10 +20,6 @@ spec:
       containers:
       - name: app-a
         image: yokv/app-a
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 1000Mi
         ports:
         - containerPort: 8080
         env:

@@ -21,10 +21,6 @@ spec:
       containers:
       - name: master
         image: yokv/eureka
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 1000Mi
         ports:
         - containerPort: 8761
 
@@ -39,6 +35,7 @@ metadata:
     role: peer1
     tier: server
 spec:
+  type: NodePort
   ports:
   - port: 8761
     targetPort: 8761
